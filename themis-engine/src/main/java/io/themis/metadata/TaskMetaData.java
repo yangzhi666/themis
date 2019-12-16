@@ -11,7 +11,7 @@ public class TaskMetaData {
     /**
      * 整条任务链ID
      */
-    private 】
+    private String chainId;
 
     /**
      * 当前任务节点ID
