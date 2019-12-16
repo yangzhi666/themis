@@ -4,27 +4,21 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.themis</groupId>
-  <artifactId>themis-parent</artifactId>
-  <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <modules>
-    <module>themis-core</module>
-    <module>themis-starter</module>
-    <module>themis-db</module>
-    <module>themis-common</module>
-    <module>themis-spring</module>
-  </modules>
+  <parent>
+    <groupId>io.themis</groupId>
+    <artifactId>themis-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>themis-db</artifactId>
 
-  <name>themis-parent</name>
+  <name>themis-db</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.themis.io</url>
+  <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-    <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
   </properties>
 
   <dependencies>
