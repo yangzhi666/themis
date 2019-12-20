@@ -1,9 +1,13 @@
 package io.themis.engine.builder;
 
+import com.sun.org.apache.xalan.internal.lib.NodeInfo;
 import io.themis.metadata.TaskMetaData;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @program: themis
@@ -18,8 +22,9 @@ public class TaskMetaBuilder {
      * addNode
      * @param handlerSlot
      */
-    public void addNode(String handlerSlot) {
+    public TaskMetaBuilder addNode(String handlerSlot) {
         addNode(handlerSlot, null);
+        return this;
     }
 
     /**
@@ -27,8 +32,9 @@ public class TaskMetaBuilder {
      * @param handlerSlot
      * @param content
      */
-    public void addNode(String handlerSlot, String content) {
+    public TaskMetaBuilder addNode(String handlerSlot, String content) {
         nodeInfoList.add(new NodeInfo(handlerSlot, content));
+        return this;
     }
 
     /**
@@ -36,9 +42,32 @@ public class TaskMetaBuilder {
      * @return
      */
     public List<TaskMetaData> build () {
-
-
-        return null;
+        if (CollectionUtils.isEmpty(nodeInfoList)) {
+            throw new IllegalArgumentException("no any task nodes！");
+        }
+        // chainId
+        String chainId = UUID.randomUUID().toString();
+        // 构建任务链元信息
+        List<TaskMetaData> metaData = new ArrayList<>();
+        TaskMetaData lastTaskMetaData = null;
+        for (NodeInfo nodeInfo : nodeInfoList) {
+            TaskMetaData taskMetaData = new TaskMetaData()
+                    .setChainId(chainId)
+                    .setTaskId(UUID.randomUUID().toString())
+                    .setHandlerSlot(nodeInfo.handlerSlot)
+                    .setCompletedFlag(0)
+                    .setContent(nodeInfo.content);
+            if (lastTaskMetaData == null) {
+                taskMetaData.setPreTaskId(null);
+            } else {
+                taskMetaData.setPreTaskId(lastTaskMetaData.getTaskId());
+                lastTaskMetaData.setNextTaskId(taskMetaData.getTaskId());
+            }
+            lastTaskMetaData = taskMetaData;
+            // add
+            metaData.add(taskMetaData);
+        }
+        return metaData;
     }
 
     class NodeInfo {
@@ -49,15 +78,6 @@ public class TaskMetaBuilder {
         public NodeInfo(String handlerSlot, String content) {
             this.handlerSlot = handlerSlot;
             this.content = content;
-        }
-
-        public String getHandlerSlot() {
-            return handlerSlot;
-        }
-
-        public NodeInfo setHandlerSlot(String handlerSlot) {
-            this.handlerSlot = handlerSlot;
-            return this;
         }
     }
 }
