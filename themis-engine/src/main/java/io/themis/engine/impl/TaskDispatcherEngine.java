@@ -34,7 +34,10 @@ public class TaskDispatcherEngine implements DispatcherEngine {
      */
     @Override
     public void receivedCompletedSignal(TaskMetaData metaData) {
+        // receivedCompletedSignal
 
+        // 指派下一个任务节点
+        this.sendTask(this.getNextTask(metaData));
     }
 
     /**

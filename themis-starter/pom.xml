@@ -27,6 +27,11 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.themis</groupId>
+      <artifactId>themis-engine</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
   </dependencies>
 
   <build>

@@ -21,7 +21,7 @@ public class TaskMetaData {
     /**
      * 任务处理器的描述
      */
-    private Object handlerSlot;
+    private String handlerSlot;
 
     /**
      * 前一个任务节点ID
@@ -34,19 +34,19 @@ public class TaskMetaData {
     private String nextTaskId;
 
     /**
-     * 当前节点任务是否已经完成
+     * 当前节点任务是否已经完成(0,1)
      */
-    private Boolean completedFlag;
+    private Integer completedFlag;
 
     /**
      * 任务内容描述
      */
-    private ContentMetaData content;
+    private String content;
 
     public TaskMetaData() {
     }
 
-    public TaskMetaData(String chainId, String taskId, Object handlerSlot, String preTaskId, String nextTaskId, Boolean completedFlag, ContentMetaData content) {
+    public TaskMetaData(String chainId, String taskId, String handlerSlot, String preTaskId, String nextTaskId, Integer completedFlag, String content) {
         this.chainId = chainId;
         this.taskId = taskId;
         this.handlerSlot = handlerSlot;
@@ -92,29 +92,29 @@ public class TaskMetaData {
         return this;
     }
 
-    public Boolean getCompletedFlag() {
+    public Integer getCompletedFlag() {
         return completedFlag;
     }
 
-    public TaskMetaData setCompletedFlag(Boolean completedFlag) {
+    public TaskMetaData setCompletedFlag(Integer completedFlag) {
         this.completedFlag = completedFlag;
         return this;
     }
 
-    public ContentMetaData getContent() {
+    public String getContent() {
         return content;
     }
 
-    public TaskMetaData setContent(ContentMetaData content) {
+    public TaskMetaData setContent(String content) {
         this.content = content;
         return this;
     }
 
-    public Object getHandlerSlot() {
+    public String getHandlerSlot() {
         return handlerSlot;
     }
 
-    public TaskMetaData setHandlerSlot(Object handlerSlot) {
+    public TaskMetaData setHandlerSlot(String handlerSlot) {
         this.handlerSlot = handlerSlot;
         return this;
     }
