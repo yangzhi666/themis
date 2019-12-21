@@ -1,6 +1,7 @@
 package io.themis.config;
 
 import org.springframework.amqp.core.AcknowledgeMode;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.context.annotation.Bean;
@@ -29,5 +30,10 @@ public class QueueConfig {
         //确认模式：自动，默认
         factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         return factory;
+    }
+
+    @Bean
+    public Queue themisSignalBus () {
+        return new Queue("themisSignalBus");
     }
 }
