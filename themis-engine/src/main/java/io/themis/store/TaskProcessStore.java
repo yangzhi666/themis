@@ -18,6 +18,19 @@ public abstract class TaskProcessStore {
      */
     public abstract void insertAllTask(List<TaskMetaData> list);
 
+    /**
+     * 任务节点完成
+     * @param taskId
+     */
+    public abstract void updateCompletedByTaskId(String taskId);
+
+    /**
+     * 获取下一个任务节点
+     * @param taskId 当前任务ID
+     * @return
+     */
+    public abstract TaskMetaData getNextTask(String taskId);
+
 
     
 }

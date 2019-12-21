@@ -1,11 +1,9 @@
 package io.themis.engine.builder;
 
-import com.sun.org.apache.xalan.internal.lib.NodeInfo;
 import io.themis.metadata.TaskMetaData;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
