@@ -1,12 +1,16 @@
 package io.themis.engine.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import io.themis.engine.DispatcherEngine;
 import io.themis.metadata.TaskMetaData;
 import io.themis.store.impl.MysqlTaskProcessStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: themis
@@ -18,6 +22,8 @@ import java.util.List;
 public class TaskDispatcherEngine implements DispatcherEngine {
     @Autowired
     private MysqlTaskProcessStore taskProcessStore;
+    @Resource
+    private MqSignalMachine mqSignalMachine;
 
 
     /**
@@ -54,7 +60,7 @@ public class TaskDispatcherEngine implements DispatcherEngine {
      */
     @Override
     public void sendTask(TaskMetaData metaData) {
-
+        mqSignalMachine.send(metaData.getHandlerSlot(), JSON.parseObject(metaData.getContent(), new TypeReference<Map<String, Object>>(){}));
     }
 
     /**
